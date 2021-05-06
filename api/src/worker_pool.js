@@ -90,12 +90,4 @@ export default class WorkerPool {
       writer.releaseLock();
     });
   }
-
-  static useThisThreadAsWorker(cb) {
-    self.addEventListener('message', async (event) => {
-      const { msg, id } = event.data;
-      const result = await cb(msg);
-      self.postMessage({ result, id });
-    });
-  }
 }

@@ -1,6 +1,5 @@
 import { autoOptimize } from './auto-optimizer.js';
 import { codecs as supportedFormats, preprocessors } from './codecs.js';
-import WorkerPool from './worker_pool.js';
 
 async function decodeFile(file) {
   const buffer = await file.arrayBuffer();
@@ -112,4 +111,8 @@ function handleJob(params) {
   }
 }
 
-WorkerPool.useThisThreadAsWorker(handleJob);
+self.addEventListener('message', async (event) => {
+  const { msg, id } = event.data;
+  const result = await handleJob(msg);
+  self.postMessage({ result, id });
+});
