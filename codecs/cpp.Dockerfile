@@ -6,4 +6,4 @@ ENV LDFLAGS "${CFLAGS} -s PTHREAD_POOL_SIZE=navigator.hardwareConcurrency"
 # Build and cache standard libraries with these flags
 RUN emcc ${CXXFLAGS} --bind -xc++ /dev/null -o /dev/null
 WORKDIR /src
-CMD ["sh", "-c", "emmake make -j`nproc`"]
+CMD ["sh", "-c", "emmake make clean && emmake make -j`nproc`"]

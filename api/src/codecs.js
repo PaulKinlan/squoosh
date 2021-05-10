@@ -196,8 +196,8 @@ export const codecs = {
     name: 'MozJPEG',
     extension: 'jpg',
     detectors: [/^\xFF\xD8\xFF/],
-    dec: () => instantiateEmscriptenWasm(mozDec, mozDecWasm),
     enc: () => instantiateEmscriptenWasm(mozEnc, mozEncWasm),
+    dec: () => instantiateEmscriptenWasm(mozDec, mozDecWasm),
     defaultEncoderOptions: {
       quality: 75,
       baseline: false,
